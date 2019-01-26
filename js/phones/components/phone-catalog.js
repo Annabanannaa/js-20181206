@@ -4,6 +4,16 @@ export default class PhoneCatalog {
         this._phones = phones;
 
         this._render();
+
+        this._element.addEventListener('click',(event) =>{
+            const phoneLink = event.target.closest('[data-element="phone-link"]');
+
+            if(!phoneLink){
+                return;
+            }
+            const phoneElement = phoneLink.closest('[data-element="phone"]');
+            console.log('yes', phoneElement.dataset.phoneId);
+        });
     }
 
     _render() {
@@ -11,8 +21,16 @@ export default class PhoneCatalog {
          <ul class="phones">
             ${ this._phones.map( phone => `
 
-            <li class="thumbnail">
-                <a href="#!/phones/${ phone.id }" class="thumb">
+            <li 
+             data-element="phone"
+             data-phone-id="${ phone.id }"
+             class="thumbnail"
+            >
+                <a
+                 data-element="phone-link"
+                 href="#!/phones/${ phone.id }"
+                 class="thumb" 
+                >
                     <img alt="Motorola XOOM™ with Wi-Fi" src="${ phone.imageUrl }">
                 </a>
             
@@ -22,7 +40,13 @@ export default class PhoneCatalog {
                     </a>
                 </div>
                 
-                <a href="#!/phones/${ phone.id }">${ phone.name }</a>
+                    <a
+                     data-element="phone-link"
+                     href="#!/phones/${ phone.id }"
+                      
+                     >
+                    ${ phone.name }
+                    </a>
                 <p>${ phone.snippet }</p>
             </li>
             

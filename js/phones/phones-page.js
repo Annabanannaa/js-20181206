@@ -37,7 +37,7 @@ export default class PhonesPage {
                 </section>
     
                 <section>
-                   <div data-component="sopping-cart"></div> 
+                   <div data-component="shopping-cart"></div> 
                 </section>
             </div>
     

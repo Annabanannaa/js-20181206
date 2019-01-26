@@ -1,5 +1,5 @@
 export default class PhoneViewer {
-    constructor({ element }){
+    constructor({element}) {
         this._element = element;
 
         this._render();
@@ -39,3 +39,4 @@ export default class PhoneViewer {
             </ul>
         `;
     }
+}

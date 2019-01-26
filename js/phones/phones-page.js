@@ -13,6 +13,12 @@ export default class PhonesPage {
         this._catalog = new PhoneCatalog({
             element: this._element.querySelector('[data-component="phone-catalog"]'),
             phones: PhoneService.getAll(),
+            onPhonesSelected: (phoneId) => {
+                let phoneDeteils = PhoneService.getById(phoneId);
+
+                this._catalog.hide();
+                this._viewer.show(phoneDeteils);
+            },
         });
 
         this._filter = new Filter({

@@ -8,17 +8,16 @@ export default class PhoneCatalog extends Component {
 
         this._render();
 
-        this._element.addEventListener('click', (event) => {
-            const phoneLink = event.target.closest('[data-element="phone-link"]');
+        this.on('click', 'phone-linck',(event)=> ){
+            const phoneElement = event.target.closest('[data-element="phone"]');
+            this.emit('phone-selected', phoneElement.dataset.phoneId);
+        }
 
-            if (!phoneLink) {
-                return;
-            }
+        this.on('click', 'add-button',(event)=> ){
+            const phoneElement = event.target.closest('[data-element="phone"]');
+            this.emit('phone-selected', phoneElement.dataset.phoneId);
+        }
 
-            const phoneElement = phoneLink.closest('[data-element="phone"]');
-
-            this.emit('phone-selected', phoneElement.dataset.id);
-        });
     }
 
     _render() {
@@ -40,7 +39,7 @@ export default class PhoneCatalog extends Component {
             </a>
   
             <div class="phones__btn-buy-wrapper">
-              <a class="btn btn-success">
+              <a class="btn btn-success" data-element="add-button">
                 Add
               </a>
             </div>

@@ -6,7 +6,7 @@ export default class PhoneViewer extends Component {
         super({ element });
 
         this.on('click', 'back-button', () => this.emit('back'));
-        this.on('click', 'add-button', () => this.emit('add'));
+        this.on('click', 'add-button', () => this.emit('add', this._phoneDetails.id));
         this.on('click', 'small-image', (event) => {
             let smallImage = event.target;
             let largeImage = this._element.querySelector('[data-element="large-image"]');

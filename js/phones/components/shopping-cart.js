@@ -1,20 +1,43 @@
-export default class SoppingCart {
-    constructor({element}) {
-        this._element = element;
+import Component from '../../component.js';
+
+export default class ShoppingCart extends Component {
+    constructor({ element }) {
+        super({ element });
+
+        this.items = [];
+
+        this._render();
+
+        this.on('click','remove-button', ( event ) => {
+            let button = event.target;
+            this.remove(button.dataset.itemId);
+        })
+    }
+
+    remove(itemIdToRemove){
+        this.items = this.items
+            .filter(itemId => itemId !== itemIdToRemove);
+
+        this._render();
+    }
+
+    add(itemId) {
+        this.items.push(itemId);
 
         this._render();
     }
 
     _render() {
-        this._element.innerHTML = `  
-            <p>Shopping Cart</p>
-            <ul>
-                <li>Phone 1</li>
-                <li>Phone 2</li>
-                <li>Phone 3</li>
-            </ul>
-        `;
+        this._element.innerHTML = `
+      <p>Shopping Cart</p>
+      <ul>
+        ${ this.items.map(itemId => `
+          <li>
+            ${ itemId }
+            <button data-element="remove-button" data-item-id="${ itemId }">X</button>
+          </li>
+        `).join('')}
+      </ul>
+    `;
     }
 }
-
-
